@@ -1,39 +1,43 @@
-const express = require("express")
+const express = require("express");
 
-const app = express() // create a server
+const app = express(); // create a server
 
 // configure the server
-app.use(express.json()) 
+app.use(express.json());
 
-notes = []
+notes = [];
 
 // POST /notes
-app.post("/notes", (req, res)=>{
-    notes.push(req.body)
-    res.send("note created successfully!")
-})
+app.post("/notes", (req, res) => {
+  notes.push(req.body);
+  res.send("note created successfully!");
+});
 
 //  GET /notes
-app.get("/notes", (req, res)=>{
-    res.send(notes)
-})
+app.get("/notes", (req, res) => {
+  res.send(notes);
+});
 
 // DELETE /notes
 // params
 // delete /notes/0
-app.delete("/notes/:index", (req, res)=>{
-    delete notes[req.params.index]
-    res.send("note deleted successfully!")
-})
+app.delete("/notes/:index", (req, res) => {
+  delete notes[req.params.index];
+  res.send("note deleted successfully!");
+});
 
+app.put("/notes/:index", (req, res) => {
+  notes[req.params.index].title = req.body.title;
+  notes[req.params.index].description = req.body.description;
+  res.send("note updated successfully!");
+});
 
 /* PATCH /notes/:index */
 /* req.body = {description :- "sample modified description."} */
 
-app.patch("/notes/:index", (req, res)=>{
-    notes[req.params.index].description = req.body.description
-    res.send("note updated successfully!")
-})
+app.patch("/notes/:index", (req, res) => {
+  notes[req.params.index].description = req.body.description;
+  res.send("notes description updated successfully!");
+});
 
-
-module.exports = app
+module.exports = app;
