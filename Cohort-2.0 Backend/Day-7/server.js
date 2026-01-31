@@ -10,5 +10,5 @@ const app = require("./src/app")
 conectedtoDB();
 
 app.listen(3000, ()=>{
-    console.log("server is running on port 3000")
+    console.log("server is successfully running on port 3000!")
 })
